@@ -7,7 +7,7 @@ class SalaCine:
     Fecha: 28/05/2025
     """
     # Atributos
-    id_sala = int
+    id_sala = str
     valor_boleta = float
     filas = int
     sillas_fila = int
@@ -22,15 +22,13 @@ class SalaCine:
 
     # Este método pide los datos básicos de la sala de cine
     def pedir_datos(self):
-        self.id_sala = int(input("Ingrese en identificador de la sala: "))
+        self.id_sala = input("Ingrese en identificador de la sala: ")
         self.valor_boleta = float(input("Ingrese el valor de la boleta: "))
         self.filas = int(input("Ingrese el numero de filas: "))
         self.sillas_fila = int(input("Ingrese el numero de sillas por fila: "))
 
     # Este método muestra a los clientes los datos basicos de la sala de cine
     def mostrar_datos(self):
-        print ("\n*** INFORMACIÓN SALA CINE ***\n")
         print(f"1. El ID de la sala es: {self.id_sala}\n2. El valor de la boleta es: {self.valor_boleta}")
         print(f"3. El número de filas de la sala es: {self.filas}\n4. El número de sillas por fila es: {self.sillas_fila}")
-
-        input("\nPresione enter para volver al menú principal...")
+        print("")
