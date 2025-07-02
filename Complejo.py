@@ -126,11 +126,11 @@ class Complejo:
 
             match(opcion):
                 case 1:
-                    input("\nIngresó a la opción 1. Registrar nuevo Cliente. Presione enter para continuar ...")
+                    input("\nIngresó a la opción 1. Registrar nuevo Cliente. Presione Enter para continuar ...")
                     print("\n*** Registro de Cliente Nuevo ***\n")
                     self.registrar_usuario()
                 case 2:
-                    input("\nIngresó a la opción 2. Agregar sala. Presione enter para continuar ...")
+                    input("\nIngresó a la opción 2. Agregar sala. Presione Enter para continuar ...")
                     print ("\n Registro de Sala \n")
                     salita = SalaCine()
                     salita.pedir_datos()
@@ -146,20 +146,18 @@ class Complejo:
                         print("Se actualizó el archivo")
 
                 case 3:
-                    input("\nIngresó a la opción 3. Consultar salas de cine. Presione enter para continuar ...")
+                    input("\nIngresó a la opción 3. Consultar salas de cine. Presione Enter para continuar ...")
                     print ("\n*** Listado de Salas ***\n")
                     if (self.cont_salas == 0):
                         print("No hay salas de cine registradas.")
                     else: 
                         for i in range(self.cont_salas):
                             salita = self.salascine[i]
-                            print(f"{i+1}. {salita.id_sala}")
-                        
-                        indice = int(input("Ingrese el número de la sala de la cual desea consultar información: "))
-                        salita = self.salascine[indice-1]
-                        salita.mostrar_datos()
+                            print(f"\tSALA CINE #{i+1}\t")
+                            salita.mostrar_datos()
+                        input("Presione Enter para volver al menu anterior...")
                 case 4:
-                    input ("\nIngresó a la opción 4. Modificar programacion peliculas. Presione enter para continuar ...")
+                    input ("\nIngresó a la opción 4. Modificar programacion peliculas. Presione Enter para continuar ...")
                     print ("\n*** Modificación Programación Películas ***\n")
                     program = Programacion()
                     program.pedir_datos()
@@ -174,15 +172,15 @@ class Complejo:
                     else:
                         print("Se actualizó el archivo")
                 case 5:
-                    input("\nIngresó a la opción 5. Consultar programacion peliculas. Presione enter para continuar ...")
+                    input("\nIngresó a la opción 5. Consultar programacion peliculas. Presione Enter para continuar ...")
                     print ("\n*** Programación Películas ***\n")
                     if (self.cont_programacion == 0):
                         print("No hay ninguna programación registrada.")
                     else:
                         print(self.programaciona)
                 case 6:
-                    input("\nIngresó a la opción 6. Agregar pelicula. Presione enter para continuar ...")
-                    print ("\n Registro de Película \n")
+                    input("\nIngresó a la opción 6. Agregar pelicula. Presione Enter para continuar ...")
+                    print ("\n*** Registro de Película ***\n")
                     pelis = Pelicula()
                     pelis.pedir_datos()
 
@@ -196,7 +194,7 @@ class Complejo:
                     else:
                         print("Se actualizó el archivo")
                 case 7:
-                    input("\nIngresó la opción 7. Cambiar estado película. Presione enter para continuar ...")
+                    input("\nIngresó la opción 7. Cambiar estado película. Presione Enter para continuar ...")
                     print ("\n Cambio de estado en una película \n")
 
                     if (self.cont_peliculas == 0):
@@ -215,7 +213,7 @@ class Complejo:
                         pelicula.estado = False
                         print("El estado de la película se actualizo exitosamente\n")
                 case 8:
-                    input("\nIngresó a la opción 8. Consultar información películas. Presione enter para continuar ...")
+                    input("\nIngresó a la opción 8. Consultar información películas. Presione Enter para continuar ...")
                     print ("\n*** Información Películas ***\n")
                     if (self.cont_peliculas == 0):
                         print("No hay ninguna película registrada.")
@@ -230,7 +228,7 @@ class Complejo:
                 case 9:
                     self.usuario_auntenticado= None
                 case _: 
-                    input("\nIngresó una opción incorrecta. Presione enter para continuar ...")
+                    input("\nIngresó una opción incorrecta. Presione Enter para continuar ...")
 
     # Muestra el menu del Vendedor, sus funcionalidades son iguales a las del cliente y ademas puede registrar nuevos clientes
     def mostrar_menu_vendedor(self):
@@ -246,29 +244,27 @@ class Complejo:
 
             match(opcion):
                 case 1:
-                    input("\nIngresó a la opción 1. Registrar nuevo Cliente. Presione enter para continuar ...")
+                    input("\nIngresó a la opción 1. Registrar nuevo Cliente. Presione Enter para continuar ...")
                     print("\n*** Registro de Cliente Nuevo ***\n")
                     self.registrar_usuario()
                 case 2:
-                    input("\nIngresó a la opción 2. Consultar salas de cine. Presione enter para continuar ...")
+                    input("\nIngresó a la opción 2. Consultar salas de cine. Presione Enter para continuar ...")
                     print ("\n*** Listado de Salas ***\n")
                     if (self.cont_salas == 0):
                         print("No hay salas de cine registradas.")
                     else: 
                         for i in range(self.cont_salas):
                             salita = self.salascine[i]
-                            print(f"{i+1}. {salita.id_sala}")
-                        
-                        indice = int(input("Ingrese el número de la sala de la cual desea consultar información: "))
-                        salita = self.salascine[indice-1]
-                        salita.mostrar_datos()
+                            print(f"\tSALA CINE #{i+1}\t")
+                            salita.mostrar_datos()
+                        input("Presione Enter para volver al menu anterior...")
                 case 3:
-                    input("\nIngresó a la opción 3. Consultar programacion peliculas. Presione enter para continuar ...")
+                    input("\nIngresó a la opción 3. Consultar programacion peliculas. Presione Enter para continuar ...")
                     print ("\n*** Programación Películas ***\n")
                     if (self.cont_programacion == 0):
                         print("No hay ninguna programación registrada.")
                 case 4:
-                    input("\nIngresó a la opción 4. Consultar información películas. Presione enter para continuar ...")
+                    input("\nIngresó a la opción 4. Consultar información películas. Presione Enter para continuar ...")
                     print ("\n*** Información Películas ***\n")
                     if (self.cont_peliculas == 0):
                         print("No hay ninguna película registrada.")
@@ -283,7 +279,7 @@ class Complejo:
                 case 5:
                     self.usuario_auntenticado= None
                 case _:
-                    input("\nIngresó una opción incorrecta. Presione enter para continuar ...")
+                    input("\nIngresó una opción incorrecta. Presione Enter para continuar ...")
 
     # Muestra el menu del Cliente en base a sus funcionalidades
     def mostrar_menu_cliente(self):
@@ -299,25 +295,23 @@ class Complejo:
 
             match(opcion):
                 case 1:
-                    input("\nIngresó a la opción 1. Consultar salas de cine. Presione enter para continuar ...")
+                    input("\nIngresó a la opción 1. Consultar salas de cine. Presione Enter para continuar ...")
                     print ("\n*** Listado de Salas ***\n")
                     if (self.cont_salas == 0):
                         print("No hay salas de cine registradas.")
                     else: 
                         for i in range(self.cont_salas):
                             salita = self.salascine[i]
-                            print(f"{i+1}. {salita.id_sala}")
-                        
-                        indice = int(input("Ingrese el número de la sala de la cual desea consultar información: "))
-                        salita = self.salascine[indice-1]
-                        salita.mostrar_datos()
+                            print(f"\tSALA CINE #{i+1}\t")
+                            salita.mostrar_datos()
+                        input("Presione Enter para volver al menu anterior...")
                 case 2:
-                    input("\nIngresó a la opción 2. Consultar programacion peliculas. Presione enter para continuar ...")
+                    input("\nIngresó a la opción 2. Consultar programacion peliculas. Presione Enter para continuar ...")
                     print ("\n*** Programación Películas ***\n")
                     if (self.cont_programacion == 0):
                         print("No hay ninguna programación registrada.")
                 case 3:
-                    input("\nIngresó a la opción 3. Consultar información películas. Presione enter para continuar ...")
+                    input("\nIngresó a la opción 3. Consultar información películas. Presione Enter para continuar ...")
                     print ("\n*** Información Películas ***\n")
                     if (self.cont_peliculas == 0):
                         print("No hay ninguna película registrada.")
@@ -330,12 +324,12 @@ class Complejo:
                         pelicula = self.peliculas[indice-1]
                         pelicula.mostrar_datos()
                 case 4:
-                    input("\nIngresó a la opción 4. Realizar una reserva. Presione enter para continuar ...")
+                    input("\nIngresó a la opción 4. Realizar una reserva. Presione Enter para continuar ...")
                     print ("\n*** RESERVA ***\n")
                 case 5:
                     self.usuario_auntenticado= None
                 case _:
-                    input("\nIngresó una opción incorrecta. Presione enter para continuar ...")
+                    input("\nIngresó una opción incorrecta. Presione Enter para continuar ...")
 
     # Este método permite autenticar a un usuario y ademas retorna True si se pudo autenticar el usaurio, False en caso contrario
     def autenticar_usuario(self):
@@ -410,4 +404,5 @@ obj = Complejo()
 print("Bienvenido a ¿Que hay para ver?")
 obj.pedir_datos()
 obj.menu_principal()
+
 
