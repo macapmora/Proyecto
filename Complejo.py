@@ -338,24 +338,30 @@ class Complejo:
         print ("\n****************************************")
         print (" Autenticación de Usuarios")
         print ("****************************************\n")
-        id = int(input("Ingrese el número de documento del usuario: "))
-        contrasenna = input("Ingrese la contraseña del usuario: ")
+
+        while True:
+            try:
+                id = int(input("Ingrese el número de documento del usuario: "))
+                break
+            except ValueError:
+                print(
+                    "\nError en la autenticación. Por favor ingrese un número de documento válido e intente nuevamente.\n")
 
         # Busca al usuario con el id ingresado en el arreglo de usuarios
         for i in range(self.cont_usuarios):
             if (self.usuarios[i].id == id):
-
-                # Si la contraseña coincide con la que ya fue almacenada, se actualiza el usaurio autenticado y retorna True
+                contrasenna = input("Ingrese la contraseña del usuario: ")
+                # Si la contraseña coincide con la que ya fue almacenada, se actualiza el usuario autenticado y retorna True
                 if (self.usuarios[i].contrasenna == contrasenna):
                     self.usuario_auntenticado = self.usuarios[i]
                     return True
                 else:
                     # Si la contraseña no coincide se muestra un mensaje y se retorna False
-                    input("La contraseña no coincide con la contraseña del usuario. Por favor presione Enter y vuelvalo a intentar...")
+                    input("\nError en la autenticación: Contraseña incorrecta. Presione Enter para continuar ...")
                     return False
 
         # Si no se cumple ninguno de los casos anteriores se muestra
-        input(f"El usuario con id {id} no está registrado. Presione Enter para continuar ...")
+        input(f"\nEl usuario con id {id} no se encuentra registrado en la base de datos. Por favor presione Enter y vuélvalo a intentar.")
         return False
     
     # Este el método es el que inicia la aplicación
@@ -365,10 +371,15 @@ class Complejo:
         while(opcion != 2):
             
             print ("\n****************************************")
-            print(f" Menu Principal Complejo {self.nombre_complejo}")
+            print(f"\t\tMenú Principal Complejo {self.nombre_complejo}")
             print ("****************************************\n")
-            print("1. Autenticarse\n2. Salir de la app")
-            opcion = float(input("Seleccione una opción del menú: "))
+            while True:
+                try:
+                    print("1. Autenticarse\n2. Salir de la app")
+                    opcion = float(input("Seleccione una opción del menú: "))
+                    break
+                except:
+                    print("\nError en la autenticación. Por favor inténtelo nuevamente.\n")
 
             match(opcion):
 
