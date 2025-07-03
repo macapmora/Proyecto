@@ -11,10 +11,10 @@ class Pelicula:
     anno_estreno = int
     duracion = int
     nombre_original = str 
-    genero = int 
+    genero = str 
     pais_origen = str
     estado = bool
-    ARCHIVO = "datos_pelicula.npy"
+    ARCHIVO = "datos_peliculas.npy"
 
     # Constantes de la clase
     GEN_DRAMA = 1
@@ -30,47 +30,51 @@ class Pelicula:
         self.anno_estreno = 0
         self.duracion = 0
         self.nombre_original = ""
-        self.genero = 0
+        self.genero = ""
         self.pais_origen = ""
         self.estado = True
     
     # Este método pide los datos básicos de la pelicula 
     def pedir_datos(self):
-
-        flag = True
-
+        opcion = 0
         self.nombre_espannol = input("Ingrese el nombre en español de la pelicula: ")
         self.anno_estreno = int(input("Ingrese el año de estreno de la pelicula: "))
         self.duracion = int(input("Ingrese la duración de la pelicula en minutos: "))
         self.nombre_original = input("Ingrese el nombre original de la pelicula: ")
 
-        while(flag):
-
-            self.genero = int(input("Ingrese el genero de la pelicula:\n1.Drama\n2.Suspenso\n3.Terror\n4.Acción\n5.Comedia\n6.Infantil\n"))
-
-            if(self.genero > 6):
-
-                print("El valor ingresado no es correcto, por favor ingrese otra opcion\n")
-            else:
-                flag = False
-
-        self.pais_origen = input("Ingrese en pais de origen de la pelicula: ")
-    
+        while (opcion == 0):
+            print("\nGéneros de Películas")
+            print("1. Drama\n2. Suspenso\n3. Terror\n4. Acción\n5. Comedia\n6. Infantil")
+            opcion = int(input("Ingrese el número del género de la película: "))
+            match(opcion):
+                case 1: 
+                    print("\nIngreso el género 1. Drama.")
+                    self.genero = "Drama"
+                case 2:
+                    print("Ingreso el género 2. Suspenso")
+                    self.genero = "Suspenso"
+                case 3:
+                    print("Ingreso el género 3. Terror")
+                    self.genero = "Terror"
+                case 4:
+                    print("Ingreso el género 4.Ación")
+                    self.genero = "Acción"
+                case 5:
+                    print("Ingreso el género 5. Comedia")
+                    self.genero = "Comedia"
+                case 6:
+                    print("Ingreso el género 6. Infantil")
+                    self.genero = "Infantil"
+                case _:
+                    input("\nIngresó una opción incorrecta. Presione Enter para continuar ...")
+        
+        self.pais_origen = input("Ingrese el país de origen de la pelicula: ")
     # Este método muestra a los clientes los daatos basicos de la pelicula
     def mostrar_datos(self):
-        opcion = 0
+        print ("\n*** INFORMACIÓN PELICULAS ***\n")
+        print(f"1. El nombre en español de la película es: {self.nombre_espannol}\n2. El año de estreno de la película es: {self.anno_estreno}")
+        print(f"3. La duración en minutos es de: {self.duracion}\n4. El nombre original es: {self.nombre_original}")
+        print(f"5. El genero es: {self.genero}\n6. El pais de origen es: {self.pais_origen}")
+        input("\nPara volver al menu principal. Presione Enter...") 
 
-        while (opcion != 3):
-            print ("\n*** INFORMACIÓN PELICULAS ***\n")
-            print(f"1. El nombre en español de la película es: {self.nombre_espannol}\n2. El año de estreno de la película es: {self.anno_estreno}")
-            print(f"3. La duración en minutos es de: {self.duracion}\n4. El nombre original es: {self.nombre_original}")
-            print(f"5. El genero es: {self.genero}\n6. El pais de origen es: {self.pais_origen}")
-            print(f"7. Volver al menu principal")
-            opcion = int(input("Seleccione 7 si desea volver al menu anterior"))
-            
-            match(opcion):
-                case 7:
-                    input("\nIngresó a la opción 7. Volver al menu principal. Presione enter para continuar ...")
-                case _:
-                    input("\nIngresó una opción incorrecta. Presione enter para continuar ...")
 
