@@ -45,7 +45,9 @@ class Complejo:
 
         # Crea el arreglo para almacenar las salas de cine
         self.salascine, self.cont_salas = self.cargar_datos(SalaCine.ARCHIVO, self.MAX_SALASCINE)
-        
+
+        print(self.salascine)
+
         # Crea el arreglo para almacenar las películas
         self.peliculas, self.cont_peliculas= self.cargar_datos(Pelicula.ARCHIVO, self.MAX_PELICULAS)
         
@@ -76,12 +78,25 @@ class Complejo:
             return arreglo_de_datos, 0
 
     def guardar_datos(self, arreglo_de_datos, archivo):
-        try:
-            np.save(archivo, arreglo_de_datos)
-            return True
-        except (FileNotFoundError, EOFError):
-            print(f"Error: No se pudieron almacenar los datos del archivo {archivo}.")
+        continua = int
+        while True:
+            print("¿Desea guardar los siguientes cambios?")
+            print(f"En: {archivo}\nArreglo de datos: {arreglo_de_datos}\n")
+            try:
+                continua = int(input("Digite 1 para Sí, 0 para No."))
+                break
+            except ValueError:
+                print("Opción inválida. Inténtelo nuevamente...")
+        if continua == 0:
+            print("Cambios no guardados.")
             return False
+        else:
+            try:
+                np.save(archivo, arreglo_de_datos)
+                return True
+            except (FileNotFoundError, EOFError):
+                print(f"Error: No se pudieron almacenar los datos del archivo {archivo}.")
+                return False
 
     # Este método pide los datos básicos del complejo
     def pedir_datos(self):
@@ -120,6 +135,10 @@ class Complejo:
                 return i
         return None
 
+    def modificar_dato(self, opcion, sala):
+        """Recibe la opción seleccionada y la sala a modificar."""
+
+
 
     # Muestra el menu del administrador, tiene la misma base de funciones que el vendedor y el usuario
     # También puede agregar o eliminar salas, cambiar el estado de las peliculas y modificar la información de estas
@@ -130,7 +149,7 @@ class Complejo:
 
         opcion = 0
 
-        while (opcion != 9):
+        while (opcion != 12):
             print ("\n************************")
             print (" MENU DE ADMINISTRADOR")
             print ("************************\n")
@@ -177,9 +196,8 @@ class Complejo:
 
                     opcion = input("\nIngrese el ID de la sala a modificar: ")
 
-                    flag = True
-                    while flag:
-                        sala_id = self.buscar_sala(opcion)
+                    sala_id = self.buscar_sala(opcion)
+                    while True:
                         if sala_id is not None:
                             sala = self.salascine[sala_id]
                             print(f"{sala.mostrar_datos()}")
@@ -188,37 +206,36 @@ class Complejo:
                                 break
                             except ValueError:
                                 print("Error en la selección del menú. Por favor intente nuevamente...")
+
+                            match datos_amodificar:
+                                case 1:
+                                    sala.nombre_sala = input("Ingrese el nuevo nombre de la sala: ")
+                                    break
+                                case 2:
+                                    sala.valor_boleta = input("Ingrese el nuevo valor de la boleta: ")
+                                    break
+                                case 3:
+                                    sala.filas = input("Ingrese el número de filas: ")
+                                    break
+                                case 4:
+                                    sala.sillas_fila = input("Ingrese el número de sillas por filas: ")
+                                    break
+                                case _:
+                                    input("Opción incorrecta. Vuelva a intentarlo...")
+                                    bandera = False
+                            if not bandera:
+                                print(self.salascine)
+
+                                self.salascine[sala_id] = sala
+
+                                if not self.guardar_datos(self.salascine, SalaCine.ARCHIVO):
+                                    print("No se pudo guardar el archivo")
+                                else:
+                                    print("Información de sala actualizada.")
+                                    print(f"\n{sala.mostrar_datos()}")
+                                    input("\nPresione Enter para volver al menú anterior...")
                         else:
                             print(f"No se encontró la sala con ID {opcion}. Por favor inténtelo nuevamente...")
-                            flag = False
-
-                    bandera = True
-                    while bandera:
-                        match datos_amodificar:
-                            case 1:
-                                sala.nombre_sala = input("Ingrese el nuevo nombre de la sala: ")
-                                bandera = False
-                            case 2:
-                                sala.valor_boleta = input("Ingrese el nuevo valor de la boleta: ")
-                                bandera = False
-                            case 3:
-                                sala.filas = input("Ingrese el número de filas: ")
-                                bandera = False
-                            case 4:
-                                sala.sillas_fila = input("Ingrese el número de sillas por filas: ")
-                                bandera = False
-                            case _:
-                                input("Opción incorrecta. Vuelva a intentarlo...")
-
-                    self.salascine[sala_id] = sala
-
-                    if not self.guardar_datos(self.salascine, SalaCine.ARCHIVO):
-                        print("No se pudo guardar el archivo")
-                    else:
-                        print("Información de sala actualizada.")
-
-                    print(f"\n{sala.mostrar_datos()}")
-                    input("\nPresione Enter para volver al menu anterior...")
                 case 4:
                     input("\nIngresó a la opción 4. Consultar salas de cine. Presione Enter para continuar ...")
                     print ("\n*** Listado de Salas ***\n")
@@ -229,7 +246,7 @@ class Complejo:
                             salita = self.salascine[i]
                             print(f"\tSALA CINE #{i+1}\t")
                             salita.mostrar_datos()
-                        input("Presione Enter para volver al menu anterior...")
+                        input("Presione Enter para volver al menú anterior...")
                 case 5:
                     pass
                 case 6:
