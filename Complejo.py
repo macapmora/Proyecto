@@ -1,12 +1,14 @@
-import numpy as np 
-from Usuario import Usuario 
+from sys import flags
+
+import numpy as np
+from Usuario import Usuario
 from SalaCine import SalaCine
 from Pelicula import Pelicula
 from Programacion import Programacion 
 
 class Complejo:
     """
-    Funcionalidad de la clase:Esta es la clase principal del programa, en esta clase se registran los usuarios y se almacenan sus datos; además 
+    Funcionalidad de la clase:Esta es la clase principal del programa, en esta clase se registran los usuarios y se almacenan sus datos; además
     se realiza el cambio de tipo de rol. En esta clase se conectan y ejecutan todas las demás.
     Autora: Maria Camila Parra
     Fecha: 28/05/2025
@@ -111,26 +113,43 @@ class Complejo:
         else:
             print("Se actualizó el archivo")
 
+    def buscar_sala(self, id):
+        """Recibe el ID de la sala a buscar y devuelve el ID si se encuentra en el arreglo de salas de cine.
+        De lo contrario, devuelve None."""
+        for i in range(self.cont_salas):
+            sala = self.salascine[i]
+            if sala.id_sala == id:
+                return i
+        return None
+
+
     # Muestra el menu del administrador, tiene la misma base de funciones que el vendedor y el usuario
     # También puede agregar o eliminar salas, cambiar el estado de las peliculas y modificar la información de estas
     def mostrar_menu_admin(self):
+        datos_amodificar = int
+        sala_id = int
+        sala = None
+
         opcion = 0
 
         while (opcion != 9):
-            print ("\n********************")
+            print ("\n************************")
             print (" MENU DE ADMINISTRADOR")
-            print ("********************\n")
-            print("1. Registrar nuevo cliente\n2. Agregar Sala\n3. Consultar salas de cine\n4. Modificar programacion películas\n5. Consultar programación peliculas")
-            print("6. Agregar pelicula\n7. Cambiar estado de una pelicula\n8. Consultar informacion películas\n9. Cerrar sesion")
-            opcion = int(input("Seleccione una opción del menú: "))
-
+            print ("************************\n")
+            while True:
+                try:
+                    print("1. Registrar nuevo cliente\n2. Agregar Sala\n3. Modificar datos de una sala\n4. Consultar salas de cine\n5. Agregar programación\n6. Modificar programacion películas\n7. Consultar programación películas\n8. Agregar película\n9. Modificar información de una película\n10. Cambiar estado de una películas\n11. Consultar informacion películas\n12. Cerrar sesión\n")
+                    opcion = int(input("Seleccione una opción del menú: "))
+                    break
+                except ValueError:
+                    print("Error en la selección del menú. Por favor inténtelo nuevamente...\n")
             match(opcion):
                 case 1:
                     input("\nIngresó a la opción 1. Registrar nuevo Cliente. Presione Enter para continuar ...")
                     print("\n*** Registro de Cliente Nuevo ***\n")
                     self.registrar_usuario()
                 case 2:
-                    input("\nIngresó a la opción 2. Agregar sala. Presione Enter para continuar ...")
+                    input("\nIngresó a la opción 2. Agregar sala. Presione Enter para continuar...")
                     print ("\n Registro de Sala \n")
                     salita = SalaCine()
                     salita.pedir_datos()
@@ -144,9 +163,66 @@ class Complejo:
                         print("No se pudo guardar el archivo")
                     else:
                         print("Se actualizó el archivo")
-
                 case 3:
-                    input("\nIngresó a la opción 3. Consultar salas de cine. Presione Enter para continuar ...")
+                    input("\nIngresó a la opción 3. Modificar sala. Presione Enter para continuar...")
+                    print("*********************")
+                    print("\tMODIFICAR SALA CINE\t")
+                    print("*********************\n")
+                    if (self.cont_salas == 0):
+                        print("No hay salas de cine registradas.")
+                    else:
+                        print("\nListado de salas de cine\n")
+                        for i in range(self.cont_salas):
+                            salita = self.salascine[i]
+                            print(f"\tSALA CINE #{i+1}\t")
+                            salita.mostrar_datos()
+
+                    opcion = input("\nIngrese el ID de la sala a modificar: ")
+
+                    flag = True
+                    while flag:
+                        sala_id = self.buscar_sala(opcion)
+                        if sala_id is not None:
+                            sala = self.salascine[sala_id]
+                            print(f"{sala.mostrar_datos()}")
+                            try:
+                                datos_amodificar = int(input("Ingrese una opción del menú: "))
+                                break
+                            except ValueError:
+                                print("Error en la selección del menú. Por favor intente nuevamente...")
+                        else:
+                            print(f"No se encontró la sala con ID {opcion}. Por favor inténtelo nuevamente...")
+                            flag = False
+
+                    bandera = True
+                    while bandera:
+                        match datos_amodificar:
+                            case 1:
+                                sala.nombre_sala = input("Ingrese el nuevo nombre de la sala: ")
+                                bandera = False
+                            case 2:
+                                sala.valor_boleta = input("Ingrese el nuevo valor de la boleta: ")
+                                bandera = False
+                            case 3:
+                                sala.filas = input("Ingrese el número de filas: ")
+                                bandera = False
+                            case 4:
+                                sala.sillas_fila = input("Ingrese el número de sillas por filas: ")
+                                bandera = False
+                            case _:
+                                input("Opción incorrecta. Vuelva a intentarlo...")
+
+                    self.salascine[sala_id] = sala
+
+                    if not self.guardar_datos(self.salascine, SalaCine.ARCHIVO):
+                        print("No se pudo guardar el archivo")
+                    else:
+                        print("Información de sala actualizada.")
+
+                    print(f"\n{sala.mostrar_datos()}")
+                    input("\nPresione Enter para volver al menu anterior...")
+                case 4:
+                    input("\nIngresó a la opción 4. Consultar salas de cine. Presione Enter para continuar ...")
                     print ("\n*** Listado de Salas ***\n")
                     if (self.cont_salas == 0):
                         print("No hay salas de cine registradas.")
@@ -156,8 +232,10 @@ class Complejo:
                             print(f"\tSALA CINE #{i+1}\t")
                             salita.mostrar_datos()
                         input("Presione Enter para volver al menu anterior...")
-                case 4:
-                    input ("\nIngresó a la opción 4. Modificar programacion peliculas. Presione Enter para continuar ...")
+                case 5:
+                    pass
+                case 6:
+                    input ("\nIngresó a la opción 6. Modificar programacion peliculas. Presione Enter para continuar ...")
                     print ("\n*** Modificación Programación Películas ***\n")
                     program = Programacion()
                     program.pedir_datos()
@@ -171,15 +249,15 @@ class Complejo:
                         print("No se pudo guardar el archivo")
                     else:
                         print("Se actualizó el archivo")
-                case 5:
-                    input("\nIngresó a la opción 5. Consultar programacion peliculas. Presione Enter para continuar ...")
+                case 7:
+                    input("\nIngresó a la opción 7. Consultar programacion peliculas. Presione Enter para continuar ...")
                     print ("\n*** Programación Películas ***\n")
                     if (self.cont_programacion == 0):
                         print("No hay ninguna programación registrada.")
                     else:
                         print(self.programaciona)
-                case 6:
-                    input("\nIngresó a la opción 6. Agregar pelicula. Presione Enter para continuar ...")
+                case 8:
+                    input("\nIngresó a la opción 8. Agregar pelicula. Presione Enter para continuar ...")
                     print ("\n*** Registro de Película ***\n")
                     pelis = Pelicula()
                     pelis.pedir_datos()
@@ -193,8 +271,10 @@ class Complejo:
                         print("No se pudo guardar el archivo")
                     else:
                         print("Se actualizó el archivo")
-                case 7:
-                    input("\nIngresó la opción 7. Cambiar estado película. Presione Enter para continuar ...")
+                case 9:
+                    pass
+                case 10:
+                    input("\nIngresó la opción 10. Cambiar estado película. Presione Enter para continuar ...")
                     print ("\n Cambio de estado en una película \n")
 
                     if (self.cont_peliculas == 0):
@@ -212,8 +292,8 @@ class Complejo:
                         pelicula = self.peliculas[indice-1]
                         pelicula.estado = False
                         print("El estado de la película se actualizo exitosamente\n")
-                case 8:
-                    input("\nIngresó a la opción 8. Consultar información películas. Presione Enter para continuar ...")
+                case 11:
+                    input("\nIngresó a la opción 11. Consultar información películas. Presione Enter para continuar ...")
                     print ("\n*** Información Películas ***\n")
                     if (self.cont_peliculas == 0):
                         print("No hay ninguna película registrada.")
@@ -225,7 +305,7 @@ class Complejo:
                         indice = int(input("Ingrese el número de la película de la cual desea consultar información: "))
                         pelicula = self.peliculas[indice]
                         pelicula.mostrar_datos()
-                case 9:
+                case 12:
                     self.usuario_auntenticado= None
                 case _: 
                     input("\nIngresó una opción incorrecta. Presione Enter para continuar ...")
@@ -341,15 +421,14 @@ class Complejo:
 
         while True:
             try:
-                id = int(input("Ingrese el número de documento del usuario: "))
+                id_usuario = int(input("Ingrese el número de documento del usuario: "))
                 break
             except ValueError:
-                print(
-                    "\nError en la autenticación. Por favor ingrese un número de documento válido e intente nuevamente.\n")
+                print("\nError en la autenticación. Por favor ingrese un número de documento válido e intente nuevamente.\n")
 
         # Busca al usuario con el id ingresado en el arreglo de usuarios
         for i in range(self.cont_usuarios):
-            if (self.usuarios[i].id == id):
+            if (self.usuarios[i].id == id_usuario):
                 contrasenna = input("Ingrese la contraseña del usuario: ")
                 # Si la contraseña coincide con la que ya fue almacenada, se actualiza el usuario autenticado y retorna True
                 if (self.usuarios[i].contrasenna == contrasenna):
@@ -361,7 +440,7 @@ class Complejo:
                     return False
 
         # Si no se cumple ninguno de los casos anteriores se muestra
-        input(f"\nEl usuario con id {id} no se encuentra registrado en la base de datos. Por favor presione Enter y vuélvalo a intentar.")
+        input(f"\nEl usuario con ID {id_usuario} no se encuentra registrado en la base de datos. Por favor presione Enter y vuélvalo a intentar.")
         return False
     
     # Este el método es el que inicia la aplicación
@@ -399,7 +478,7 @@ class Complejo:
                     print("\n Vuelva pronto. Aplicación terminada")
                 case _:
                     print("\n Opción incorrecta. Inténtelo de nuevo")
-    
+
 obj = Complejo()
 print("Bienvenido a ¿Que hay para ver?")
 obj.pedir_datos()
