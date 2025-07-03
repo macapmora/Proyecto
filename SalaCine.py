@@ -29,6 +29,6 @@ class SalaCine:
 
     # Este método muestra a los clientes los datos basicos de la sala de cine
     def mostrar_datos(self):
-        print(f"1. El ID de la sala es: {self.id_sala}\n2. El valor de la boleta es: {self.valor_boleta}")
-        print(f"3. El número de filas de la sala es: {self.filas}\n4. El número de sillas por fila es: {self.sillas_fila}")
-        print("")
+        print(f"""1. El ID de la sala es: {self.id_sala}\n2. El valor de la boleta es: {self.valor_boleta}
+3. El número de filas de la sala es: {self.filas}\n4. El número de sillas por fila es: {self.sillas_fila}""")
+        return ""
