@@ -331,7 +331,7 @@ class Complejo:
             print (" MENU DE VENDEDOR")
             print ("********************\n")
             print("1. Registrar nuevo cliente\n2. Consultar salas de cine")
-            print("3. Consultar programacion peliculas\n4. Consultar informacion peliculas\n5. Cerrar sesion")
+            print("3. Consultar programacion peliculas\n4. Consultar informacion peliculas\n5. Realizar Reserva\n6. Cerrar sesion")
             opcion = int(input("Seleccione una opción del menú: "))
 
             match(opcion):
@@ -361,14 +361,32 @@ class Complejo:
                     if (self.cont_peliculas == 0):
                         print("No hay ninguna película registrada.")
                     else: 
+                        #Mostrar solo las peliculas que tienen el estado = "Activa"
+                        peliculas_activas = [0] * self.cont_peliculas
+                        cont_pactivas = 0
                         for i in range(self.cont_peliculas):
                             pelicula = self.peliculas[i]
-                            print(f"{i+1}. {pelicula.nombre_espannol}")
-                        
-                        indice = int(input("Ingrese el número de la película de la cual desea consultar información: "))
-                        pelicula = self.peliculas[indice-1]
+                            if (pelicula.estado == True):
+                                peliculas_activas[cont_pactivas] = i
+                                cont_pactivas += 1
+
+                        if (cont_pactivas == 0):       
+                            print("No hay películas activas registradas.")
+                        else:
+                            print("*** Películas activas registradas ***")
+                            for i in range(cont_pactivas):
+                                indice = peliculas_activas[i]
+                                pelicula = self.peliculas[indice]
+                                print(f"{i+1}. {pelicula.nombre_espannol}")
+
+                        opcion = int(input("Ingrese el número de la película de la cual desea consultar información: "))
+                        indice = peliculas_activas[opcion-1]
+                        pelicula = self.peliculas[indice]
                         pelicula.mostrar_datos()
                 case 5:
+                    input("\nIngresó a la opción 5. Realizar una reserva. Presione Enter para continuar ...")
+                    print ("\n*** RESERVA ***\n")   
+                case 6:
                     self.usuario_auntenticado= None
                 case _:
                     input("\nIngresó una opción incorrecta. Presione Enter para continuar ...")
@@ -408,12 +426,27 @@ class Complejo:
                     if (self.cont_peliculas == 0):
                         print("No hay ninguna película registrada.")
                     else: 
+                        #Mostrar solo las peliculas que tienen el estado = "Activa"
+                        peliculas_activas = [0] * self.cont_peliculas
+                        cont_pactivas = 0
                         for i in range(self.cont_peliculas):
                             pelicula = self.peliculas[i]
-                            print(f"{i+1}. {pelicula.nombre_espannol}")
-                        
-                        indice = int(input("Ingrese el número de la película de la cual desea consultar información: "))
-                        pelicula = self.peliculas[indice-1]
+                            if (pelicula.estado == True):
+                                peliculas_activas[cont_pactivas] = i
+                                cont_pactivas += 1
+
+                        if (cont_pactivas == 0):       
+                            print("No hay películas activas registradas.")
+                        else:
+                            print("*** Películas activas registradas ***")
+                            for i in range(cont_pactivas):
+                                indice = peliculas_activas[i]
+                                pelicula = self.peliculas[indice]
+                                print(f"{i+1}. {pelicula.nombre_espannol}")
+
+                        opcion = int(input("Ingrese el número de la película de la cual desea consultar información: "))
+                        indice = peliculas_activas[opcion-1]
+                        pelicula = self.peliculas[indice]
                         pelicula.mostrar_datos()
                 case 4:
                     input("\nIngresó a la opción 4. Realizar una reserva. Presione Enter para continuar ...")
