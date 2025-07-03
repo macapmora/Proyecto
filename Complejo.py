@@ -189,7 +189,7 @@ class Complejo:
                     self.cont_peliculas += 1
                     print ("\n ¡La película ha sido agregada con éxito! \n")
 
-                    if not self.guardar_datos(self.programaciona, Programacion.ARCHIVO):
+                    if not self.guardar_datos(self.peliculas, Pelicula.ARCHIVO):
                         print("No se pudo guardar el archivo")
                     else:
                         print("Se actualizó el archivo")
@@ -200,18 +200,27 @@ class Complejo:
                     if (self.cont_peliculas == 0):
                         print("No hay ninguna pelicula registrada")
                     else:
-                        print("\n Listado de peliculas ")
+                        print("\n Listado de peliculas\n")
                         for i in range(self.cont_peliculas):
                             pelicula = self.peliculas[i]
-                        
-                            if (pelicula.estado):
-                                condicion = "Activa"
-                                print(f"{i+1}. {pelicula.nombre_espannol} ({condicion})")
+                            estado = pelicula.estado 
+                            if (estado):
+                                estado = "Activa"
+                            else: 
+                                estado = "Inactiva"
+                            print(f"{i+1}. {pelicula.nombre_espannol} ({estado})")
                     
                         indice = int(input("Ingrese el número de la película para cambiar su estado: "))
                         pelicula = self.peliculas[indice-1]
-                        pelicula.estado = False
-                        print("El estado de la película se actualizo exitosamente\n")
+                        if (pelicula.estado):
+                            pelicula.estado = False
+                        else:
+                            pelicula.estado = True 
+                        
+                        if not self.guardar_datos(self.peliculas, Pelicula.ARCHIVO):
+                            print("No se pudo guardar el archivo")
+                        else:
+                            print("\nEl estado de la película se actualizo exitosamente")
                 case 8:
                     input("\nIngresó a la opción 8. Consultar información películas. Presione Enter para continuar ...")
                     print ("\n*** Información Películas ***\n")
@@ -220,10 +229,15 @@ class Complejo:
                     else: 
                         for i in range(self.cont_peliculas):
                             pelicula = self.peliculas[i]
-                            print(f"{i}. {pelicula.nombre_espannol}")
+                            estado = pelicula.estado
+                            if (estado):
+                                estado = "Activa"
+                            else: 
+                                estado = "Inactiva"
+                            print(f"{i+1}. {pelicula.nombre_espannol} ({estado})")
                         
                         indice = int(input("Ingrese el número de la película de la cual desea consultar información: "))
-                        pelicula = self.peliculas[indice]
+                        pelicula = self.peliculas[indice-1]
                         pelicula.mostrar_datos()
                 case 9:
                     self.usuario_auntenticado= None
@@ -371,7 +385,7 @@ class Complejo:
         while(opcion != 2):
             
             print ("\n****************************************")
-            print(f"\t\tMenú Principal Complejo {self.nombre_complejo}")
+            print(f"\tMenú Principal Complejo {self.nombre_complejo}")
             print ("****************************************\n")
             while True:
                 try:
