@@ -1,14 +1,10 @@
 import numpy as np
-from SalaCine import SalaCine
 from Pelicula import Pelicula
 from datetime import datetime
 
 class Programacion:
     peliculas = np.ndarray
     horario = np.ndarray
-    filas = int
-    columnas = int
-    mapa_sala = np.ndarray
     cont_peliculas = int
     ARCHIVO = "datos_programacion.npy"
 
@@ -18,9 +14,6 @@ class Programacion:
         self.peliculas = np.full(self.MAX_PELICULAS, fill_value= None, dtype= object)
         self.cont_peliculas = 0
         self.horario = np.full(self.MAX_PELICULAS, fill_value= None, dtype= datetime)
-        self.filas = self.sala.filas
-        self.columnas = self.sala.sillas_fila
-        self.mapa_sala = np.full((self.filas, self.columnas), fill_value= 0, dtype=int)
 
     def pedir_datos(self):
         if self.cont_peliculas < self.MAX_PELICULAS:
@@ -45,6 +38,7 @@ class Programacion:
             if peli_escogida == self.peliculas[i].nombre_espannol:
                 print(f"Los horarios de la pelicula {self.peliculas[i].nombre_espannol} son:\n{self.horario[i]}")
 
+    # ESTA CLASE VA EN RESERVA, NO AQUÍ
     def reservar_asientos(self):
         i = int
         j = int

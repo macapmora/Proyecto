@@ -1,4 +1,7 @@
-class SalaCine:
+import numpy as np
+from Programacion import Programacion
+
+class SalaCine():
     """
     Funcionalidad de la clase: Esta clase representa una sala de cine dentro del complejo.
     Su función principal es organizar los datos de cada sala de cine, también la disposición física de los asientos
@@ -7,20 +10,22 @@ class SalaCine:
     Fecha: 28/05/2025
     """
     # Atributos
-    id_sala = str
-    valor_boleta = float
-    filas = int
-    sillas_fila = int
-    programacion = object
-    ARCHIVO = "datos_salacine.npy"
+    id_sala : str
+    valor_boleta : float
+    filas : int
+    sillas_fila : int
+    programacion : object
+    mapa_sala : np.ndarray
+    ARCHIVO : str = "datos_salacine.npy"
 
     # Constructor de la clase
     def __init__(self):
-        self.id_sala = 0
+        self.id_sala = ""
         self.valor_boleta = 0
         self.filas = 0
         self.sillas_fila = 0
         self.programacion = Programacion()
+        self.mapa_sala = np.full((self.filas, self.sillas_fila), dtype=str, fill_value='O')
 
     # Este método pide los datos básicos de la sala de cine
     def pedir_datos(self):
