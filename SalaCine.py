@@ -1,7 +1,7 @@
 class SalaCine:
     """
-    Funcionalidad de la clase: Esta clase representa una sala de cine dentro de el complejo. 
-    Su función principal es organizar los datos de cada sala de cine, tambien la disposición física de los asientos
+    Funcionalidad de la clase: Esta clase representa una sala de cine dentro del complejo.
+    Su función principal es organizar los datos de cada sala de cine, también la disposición física de los asientos
     y almacenar la programación de funciones de películas.
     Autora: Manuela Jimenez Muñoz
     Fecha: 28/05/2025
@@ -11,6 +11,7 @@ class SalaCine:
     valor_boleta = float
     filas = int
     sillas_fila = int
+    programacion = object
     ARCHIVO = "datos_salacine.npy"
 
     # Constructor de la clase
@@ -19,6 +20,7 @@ class SalaCine:
         self.valor_boleta = 0
         self.filas = 0
         self.sillas_fila = 0
+        self.programacion = Programacion()
 
     # Este método pide los datos básicos de la sala de cine
     def pedir_datos(self):
