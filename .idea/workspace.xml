@@ -7,12 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89a04772-bcda-4d24-90ae-23f98b0144f0" name="Changes" comment="Holi">
-      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Programacion.py" beforeDir="false" afterPath="$PROJECT_DIR$/Programacion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SalaCine.py" beforeDir="false" afterPath="$PROJECT_DIR$/SalaCine.py" afterDir="false" />
-    </list>
+    <list default="true" id="89a04772-bcda-4d24-90ae-23f98b0144f0" name="Changes" comment="Holi" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,7 +87,7 @@
       <option name="presentableId" value="Default" />
       <updated>1751603363296</updated>
       <workItem from="1751603364686" duration="8388000" />
-      <workItem from="1751649585874" duration="7046000" />
+      <workItem from="1751649585874" duration="7348000" />
     </task>
     <task id="LOCAL-00001" summary="Holi">
       <option name="closed" value="true" />
