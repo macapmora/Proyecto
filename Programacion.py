@@ -14,7 +14,7 @@ class Programacion:
 
     MAX_PELICULAS = 5
 
-    def init__(self):
+    def __init__(self):
         self.peliculas = np.full(self.MAX_PELICULAS, fill_value= None, dtype= object)
         self.cont_peliculas = 0
         self.horario = np.full(self.MAX_PELICULAS, fill_value= None, dtype= datetime)
@@ -32,7 +32,7 @@ class Programacion:
             else:
                 print("La pelicula se encuentra inactiva, por lo cual no se le puede asignar un horario")
         else:
-            print("La programacion de la sala ya tiene su maximo de peliculas")
+            print("La programacion de la sala ya tiene su maximo de peliculas.")
 
     def disponibilidad(self):
         peli_escogida = str
