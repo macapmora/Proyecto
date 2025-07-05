@@ -68,7 +68,7 @@ class Complejo:
         try:
             arreglo_de_datos = np.load(archivo, allow_pickle=True)
             i = 0
-            while arreglo_de_datos[i] is not None:
+            while arreglo_de_datos[i] != None:
                 i += 1
             return arreglo_de_datos, i
         except (FileNotFoundError, EOFError):
@@ -338,6 +338,7 @@ class Complejo:
                     self.peliculas[self.cont_peliculas] = pelis
                     self.cont_peliculas += 1
 
+
                     if self.guardar_datos(self.peliculas,Pelicula.ARCHIVO):
                         print ("\n¡La película ha sido agregada con éxito!")
                     input("\nPresione Enter para volver al menú anterior...")
@@ -369,16 +370,17 @@ class Complejo:
 
     # Muestra el menu del Vendedor, sus funcionalidades son iguales a las del cliente y además puede registrar nuevos clientes
     def mostrar_menu_vendedor(self):
+        global cont_pactivas
         opcion = 0
 
-        while opcion != 5:
+        while opcion != 6:
             while True:
                 try:
                     print("\n********************")
                     print(" MENU DE VENDEDOR")
                     print("********************\n")
                     print("1. Registrar nuevo cliente\n2. Consultar salas de cine")
-                    print("3. Consultar programacion peliculas\n4. Consultar informacion peliculas\n5. Cerrar sesion")
+                    print("3. Consultar programacion peliculas\n4. Consultar informacion peliculas\n5. Realizar Reserva\n6. Cerrar sesion")
                     opcion = int(input("Seleccione una opción del menú: "))
                     break
                 except ValueError:
@@ -406,8 +408,36 @@ class Complejo:
                     if self.cont_peliculas == 0:
                         print("\nNo hay ninguna película registrada.")
                     else:
-                        self.consultar_info_peliculas()
+                        print ("\n*** Información Películas ***\n")
+                        if self.cont_peliculas == 0:
+                            print("No hay ninguna película registrada.")
+                        else:
+                            #Mostrar solo las peliculas que tienen el estado = "Activa"
+                            peliculas_activas = [0] * self.cont_peliculas
+                            cont_pactivas = 0
+                            for i in range(self.cont_peliculas):
+                                pelicula = self.peliculas[i]
+                                if pelicula.estado:
+                                    peliculas_activas[cont_pactivas] = i
+                                    cont_pactivas += 1
+
+                        if cont_pactivas == 0:
+                            print("No hay películas activas registradas.")
+                        else:
+                            print("*** Películas activas registradas ***")
+                            for i in range(cont_pactivas):
+                                indice = peliculas_activas[i]
+                                pelicula = self.peliculas[indice]
+                                print(f"{i+1}. {pelicula.nombre_espannol}")
+
+                        opcion = int(input("Ingrese el número de la película de la cual desea consultar información: "))
+                        indice = peliculas_activas[opcion-1]
+                        pelicula = self.peliculas[indice]
+                        pelicula.mostrar_datos()
                 case 5:
+                    input("\nIngresó a la opción 5. Realizar una reserva. Presione Enter para continuar ...")
+                    print ("\n*** RESERVA ***\n")
+                case 6:
                     self.usuario_auntenticado= None
                 case _:
                     input("\nIngresó una opción incorrecta. Presione Enter para continuar ...")
@@ -450,7 +480,28 @@ class Complejo:
                     if self.cont_peliculas == 0:
                         print("No hay ninguna película registrada.")
                     else: 
-                        self.consultar_info_peliculas()
+                        #Mostrar solo las peliculas que tienen el estado = "Activa"
+                        peliculas_activas = [0] * self.cont_peliculas
+                        cont_pactivas = 0
+                        for i in range(self.cont_peliculas):
+                            pelicula = self.peliculas[i]
+                            if (pelicula.estado == True):
+                                peliculas_activas[cont_pactivas] = i
+                                cont_pactivas += 1
+
+                        if (cont_pactivas == 0):
+                            print("No hay películas activas registradas.")
+                        else:
+                            print("*** Películas activas registradas ***")
+                            for i in range(cont_pactivas):
+                                indice = peliculas_activas[i]
+                                pelicula = self.peliculas[indice]
+                                print(f"{i+1}. {pelicula.nombre_espannol}")
+
+                        opcion = int(input("Ingrese el número de la película de la cual desea consultar información: "))
+                        indice = peliculas_activas[opcion-1]
+                        pelicula = self.peliculas[indice]
+                        pelicula.mostrar_datos()
                 case 4:
                     input("\nIngresó a la opción 4. Realizar una reserva. Presione Enter para continuar ...")
                     print ("\n*** RESERVA ***\n")
@@ -505,8 +556,6 @@ class Complejo:
                     break
                 except ValueError:
                     print("\nError en la autenticación. Por favor inténtelo nuevamente.\n")
-
-            # noinspection PyUnreachableCode
             match opcion:
                 case 1:
                     if self.autenticar_usuario():
