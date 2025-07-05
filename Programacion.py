@@ -17,8 +17,6 @@ class Programacion:
 
     def pedir_datos(self):
         if self.cont_peliculas < self.MAX_PELICULAS:
-            peli = Pelicula()
-            peli.pedir_datos()
             self.peliculas[self.cont_peliculas] = peli
             if self.peliculas[self.cont_peliculas].estado:
                 self.horario[self.cont_peliculas] = datetime(input("Ingrese el horario asignado para la pelicula: "))

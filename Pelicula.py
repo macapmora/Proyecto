@@ -14,6 +14,7 @@ class Pelicula:
     genero = str 
     pais_origen = str
     estado = bool
+    calificacion = float
     ARCHIVO = "datos_peliculas.npy"
 
     # Constantes de la clase
@@ -33,6 +34,7 @@ class Pelicula:
         self.genero = ""
         self.pais_origen = ""
         self.estado = True
+        self.calificacion = 0
     
     # Este método pide los datos básicos de la pelicula 
     def pedir_datos(self):
@@ -74,6 +76,11 @@ class Pelicula:
                             input("\nIngresó una opción incorrecta. Presione Enter e intente de nuevo...")
                             break
                     self.pais_origen = input("\nIngrese el país de origen de la pelicula: ")
+                    while True:
+                        try:
+                            self.calificacion = float(input("Ingrese la calificación de la película (1 a 5): "))
+                        except ValueError:
+                            print("Error en la calificación de la película. Por favor intente de nuevo...")
                     return
 
     # Este método muestra a los clientes los datos basicos de la pelicula

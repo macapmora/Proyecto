@@ -169,7 +169,6 @@ class Complejo:
                             print(f"\nError en la selección del menú. Por favor, vuelva a intentarlo...")
                         else:
                             while True:
-                                # noinspection PyUnreachableCode
                                 match datos_amodificar:
                                     case 1:
                                         sala.nombre_sala = input("\nIngrese el nuevo nombre de la sala: ")
@@ -191,6 +190,7 @@ class Complejo:
                                         while True:
                                             try:
                                                 sala.sillas_fila = int(input("\nIngrese el número de sillas por filas: "))
+                                                break
                                             except ValueError:
                                                 print("\nError en la asignación del número de sillas por filas. Por favor, vuelva a intentarlo...")
                                     case _:
