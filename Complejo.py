@@ -130,7 +130,7 @@ class Complejo:
 
         opcion = 0
 
-        while (opcion != 9):
+        while (opcion != 12):
             print ("\n************************")
             print (" MENU DE ADMINISTRADOR")
             print ("************************\n")
@@ -326,7 +326,7 @@ class Complejo:
     def mostrar_menu_vendedor(self):
         opcion = 0
 
-        while (opcion != 5):
+        while (opcion != 6):
             print ("\n********************")
             print (" MENU DE VENDEDOR")
             print ("********************\n")
