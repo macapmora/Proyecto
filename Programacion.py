@@ -1,39 +1,29 @@
 import numpy as np
-from SalaCine import SalaCine
 from Pelicula import Pelicula
 from datetime import datetime
 
 class Programacion:
     peliculas = np.ndarray
     horario = np.ndarray
-    filas = int
-    columnas = int
-    mapa_sala = np.ndarray
     cont_peliculas = int
     ARCHIVO = "datos_programacion.npy"
 
     MAX_PELICULAS = 5
 
-    def init__(self):
-        self.peliculas = np.full((self.MAX_PELICULAS), fill_value= None, dtype= object)
+    def __init__(self):
+        self.peliculas = np.full(self.MAX_PELICULAS, fill_value= None, dtype= object)
         self.cont_peliculas = 0
-        self.sala = SalaCine()
-        self.horario = np.full((self.MAX_PELICULAS), fill_value= None, dtype= datetime)
-        self.filas = self.sala.filas
-        self.columnas = self.sala.sillas_fila
-        self.mapa_sala = np.full((self.filas, self.columnas), fill_value= 0, dtype=int)
+        self.horario = np.full(self.MAX_PELICULAS, fill_value= None, dtype= datetime)
 
     def pedir_datos(self):
-        if(self.cont_peliculas < self.MAX_PELICULAS):
-            peli = Pelicula()
-            peli.pedir_datos()
+        if self.cont_peliculas < self.MAX_PELICULAS:
             self.peliculas[self.cont_peliculas] = peli
-            if(self.peliculas[self.cont_peliculas].estado == True):
+            if self.peliculas[self.cont_peliculas].estado:
                 self.horario[self.cont_peliculas] = datetime(input("Ingrese el horario asignado para la pelicula: "))
             else:
                 print("La pelicula se encuentra inactiva, por lo cual no se le puede asignar un horario")
         else:
-            print("La programacion de la sala ya tiene su maximo de peliculas")
+            print("La programacion de la sala ya tiene su maximo de peliculas.")
 
     def disponibilidad(self):
         peli_escogida = str
@@ -43,9 +33,10 @@ class Programacion:
         peli_escogida = input("Ingrese el nombre de la pelicula de la cual desea ver su programacion: ")
 
         for i in range(0,self.MAX_PELICULAS):
-            if(peli_escogida == self.peliculas[i].nombre_espannol):
+            if peli_escogida == self.peliculas[i].nombre_espannol:
                 print(f"Los horarios de la pelicula {self.peliculas[i].nombre_espannol} son:\n{self.horario[i]}")
 
+    # ESTA CLASE VA EN RESERVA, NO AQUÍ
     def reservar_asientos(self):
         i = int
         j = int
