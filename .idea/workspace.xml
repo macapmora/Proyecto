@@ -4,19 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89a04772-bcda-4d24-90ae-23f98b0144f0" name="Changes" comment="Holi" />
+    <list default="true" id="89a04772-bcda-4d24-90ae-23f98b0144f0" name="Changes" comment="buenas noches" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Python.Complejo.executor": "Run"
+    "Python.Complejo.executor": "Run",
+    "git-widget-placeholder": "main"
   }
 }]]></component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="buenas noches">
+      <option name="closed" value="true" />
+      <created>1751692312198</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1751692312198</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="buenas noches" />
+    <option name="LAST_COMMIT_MESSAGE" value="buenas noches" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Proyecto$SalaCine.coverage" NAME="SalaCine Coverage Results" MODIFIED="1751655959556" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
